@@ -18,9 +18,15 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     a = @poll.option_a_score
     b = @poll.option_b_score
-    c = @poll.option_c_score
-    d = @poll.option_d_score
-
+    @current_winner = nil
+    if a > b
+      @current_winner = :a
+    elsif a < b
+      @current_winner = :b
+    else
+      @current_winner = :tied
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @poll }

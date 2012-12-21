@@ -1,22 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<p class="question">
   <b>Question:</b>
   <%= @poll.question %>
 </p>
 
-<p style="color:grey;">Click on one of the following options to vote. Be careful, you may only vote for one option and your vote is irreversible!</p>
+<div class="instruction">Click on one of the following options to vote.</div>
+<div class="instruction">You may only vote for one option, and your vote is irreversible!</div>
+<br />
 
-<p>    
-  <%= @poll.option_a_score %>
-  <%= link_to "Option A: ", {:controller => "polls", :action => "vote_a", :id => @poll.id}, :class => "btn btn-mini"%>
-  <%= @poll.option_a %>
-</p>
+<% if @current_winner == :a %>
+<div class="option-box winner">
+<% else %>
+<div class="option-box">
+<% end %>
+    <p>    
+      <%= @poll.option_a_score %>
+      <%= link_to "Option A: ", {:controller => "polls", :action => "vote_a", :id => @poll.id}, :class => "btn btn-mini"%>
+      <%= @poll.option_a %>
+    </p>
+</div>
+<% if @current_winner == :b %>
+<div class="option-box winner">
+<% else %>
+<div class="option-box">
+<% end %>
+    <p>
+        <%= @poll.option_b_score %>
+        <%= link_to "Option B: ", {:controller => "polls", :action => "vote_b", :id => @poll.id}, :class => "btn btn-mini"%>
+        <%= @poll.option_b %>
+    </p>
+</div>
 
-<p>
-    <%= @poll.option_b_score %>
-    <%= link_to "Option B: ", {:controller => "polls", :action => "vote_b", :id => @poll.id}, :class => "btn btn-mini"%>
-    <%= @poll.option_b %>
-</p>
+<div class="instruction">Blue means winning, without revealing the votes</div>
 
 <%= link_to 'Back', polls_path, :class => "btn btn-mini"%>
