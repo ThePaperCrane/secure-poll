@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
     <h4>Welcome!</h4>
-    <p>View Active Polls</p>
+    <p>View and Vote on Polls</p>
     <p>Create a Poll</p>
-    <p>View Your Polls</p>
+    <%= link_to "View Users", :controller => "users", :action => "list" %>
 <% else %>
     <p>You are not logged in.</p>
     <p>Please login or sign up.</p>

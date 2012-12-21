@@ -1,0 +1,7 @@
+<h3>Users</h3>
+<ul class="users">
+    <% @users.each do |user| %>
+        <li><%= user.name %>, joined on <%= user.created_at.to_date %></li>
+    <% end %>
+</ul>
+<%= link_to :home, :root %>
