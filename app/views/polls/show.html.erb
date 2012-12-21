@@ -15,7 +15,6 @@
 <div class="option-box">
 <% end %>
     <p>    
-      <%= @poll.option_a_score %>
       <%= link_to "Option A: ", {:controller => "polls", :action => "vote_a", :id => @poll.id}, :class => "btn btn-mini"%>
       <%= @poll.option_a %>
     </p>
@@ -26,7 +25,6 @@
 <div class="option-box">
 <% end %>
     <p>
-        <%= @poll.option_b_score %>
         <%= link_to "Option B: ", {:controller => "polls", :action => "vote_b", :id => @poll.id}, :class => "btn btn-mini"%>
         <%= @poll.option_b %>
     </p>
