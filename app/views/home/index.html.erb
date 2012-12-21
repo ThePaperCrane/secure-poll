@@ -1,9 +1,15 @@
 <% if user_signed_in? %>
     <h4>Welcome <%= @current_user.name if @current_user != nil %>!</h4>
-    <p><%= link_to "View and Vote on Polls", polls_path, :class => 'btn'%></p>
-    <p><%= link_to "Create a Poll", new_poll_path, :class => 'btn'%></p>
-    <p><%= link_to "View Users", { :controller => "users", :action => "list" }, :class => 'btn'%></p>
+    <% if @keypair == nil %>
+        <p>Please generate your RSA key-pair before participating in polls.</p>
+        <%= link_to "Generate", {:controller => "rsakeys", :action => "generate"}, :class => 'btn'%>
+    <% elsif %>
+        <p><%= link_to "View and Vote on Polls", polls_path, :class => 'btn'%></p>
+        <p><%= link_to "Create a Poll", new_poll_path, :class => 'btn'%></p>
+        <p><%= link_to "View Users", { :controller => "users", :action => "list" }, :class => 'btn'%></p>
+        <br />
+    <% end %>
 <% else %>
-    <p>You are not logged in.</p>
+    <h3>You are not logged in.</h3>
     <p>Please login or sign up.</p>
 <% end %>

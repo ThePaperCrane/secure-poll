@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Userid:</b>
+  <%= @rsakey.userid %>
+</p>
+
+<p>
+  <b>Marshkey:</b>
+  <%= @rsakey.marshkey %>
+</p>
+
+
+<%= link_to 'Edit', edit_rsakey_path(@rsakey) %> |
+<%= link_to 'Back', rsakeys_path %>

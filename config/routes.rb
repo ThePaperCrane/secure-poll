@@ -19,6 +19,8 @@ SecurePoll::Application.routes.draw do
   
   resources :polls
   
+  match "/rsakeys/generate" => "rsakeys#generate"
+  resources :rsakeys
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
