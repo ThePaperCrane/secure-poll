@@ -1,0 +1,15 @@
+<h3>All Polls</h3>
+<p>Click on a poll to cast a vote</p>
+<table>
+<% @polls.each do |poll| %>
+  <tr>
+    <td><%= poll.question[0,80] %> <%= '...' if poll.question.length > 79 %></td>
+    <td><%= link_to 'vote', poll, :class => 'btn btn-mini' %></td>
+    <td><%= link_to 'delete', poll, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Poll', new_poll_path, :class => 'btn'%> <%= link_to 'Home', root_path, :class => 'btn'%>

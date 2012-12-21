@@ -12,6 +12,13 @@ SecurePoll::Application.routes.draw do
   
   resources :users
   
+  match "/polls/vote1/:id" => "polls#vote_a"
+  match "/polls/vote2/:id" => "polls#vote_b"
+  match "/polls/vote3/:id" => "polls#vote_c"
+  match "/polls/vote4/:id" => "polls#vote_d"
+  
+  resources :polls
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
