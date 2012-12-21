@@ -94,7 +94,34 @@ class PollsController < ApplicationController
   
   def vote_a
     @poll = Poll.find(params[:id])
-    @poll.option_a_score += 1
+    if current_user != nil
+      voted_array = Voted.find_all_by_userid(current_user.id)
+      voted_on_poll_before = false
+      if voted_array == []
+        voted = Voted.new
+        voted.userid = current_user.id
+        voted.pollid = @poll.id
+        
+        if voted.save
+          @poll.option_a_score += 1
+        end
+      else
+        voted_array.each do |v|
+          if v.pollid == @poll.id
+            voted_on_poll_before = true
+          end
+        end
+        if not voted_on_poll_before
+          voted = Voted.new
+          voted.userid = current_user.id
+          voted.pollid = @poll.id
+
+          if voted.save
+            @poll.option_a_score += 1
+          end
+        end
+      end
+    end
     
     respond_to do |format|
       if @poll.update_attributes(params[:poll])
