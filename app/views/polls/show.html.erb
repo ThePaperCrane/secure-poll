@@ -5,7 +5,7 @@
   <%= @poll.question %>
 </p>
 
-<p style="color:grey;">Click on one of the following options to vote!</p>
+<p style="color:grey;">Click on one of the following options to vote. Be careful, you may only vote for one option and your vote is irreversible!</p>
 
 <p>    
   <%= @poll.option_a_score %>
@@ -17,18 +17,6 @@
     <%= @poll.option_b_score %>
     <%= link_to "Option B: ", {:controller => "polls", :action => "vote_b", :id => @poll.id}, :class => "btn btn-mini"%>
     <%= @poll.option_b %>
-</p>
-
-<p>
-    <%= @poll.option_c_score %>
-    <%= link_to "Option C: ", {:controller => "polls", :action => "vote_c", :id => @poll.id}, :class => "btn btn-mini"%>
-    <%= @poll.option_c %>
-</p>
-
-<p>
-    <%= @poll.option_d_score %>
-    <%= link_to "Option D: ", {:controller => "polls", :action => "vote_d", :id => @poll.id}, :class => "btn btn-mini"%>
-    <%= @poll.option_d %>
 </p>
 
 <%= link_to 'Back', polls_path, :class => "btn btn-mini"%>

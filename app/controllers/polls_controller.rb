@@ -136,7 +136,34 @@ class PollsController < ApplicationController
   
   def vote_b
     @poll = Poll.find(params[:id])
-    @poll.option_b_score += 1
+    if current_user != nil
+      voted_array = Voted.find_all_by_userid(current_user.id)
+      voted_on_poll_before = false
+      if voted_array == []
+        voted = Voted.new
+        voted.userid = current_user.id
+        voted.pollid = @poll.id
+        
+        if voted.save
+          @poll.option_b_score += 1
+        end
+      else
+        voted_array.each do |v|
+          if v.pollid == @poll.id
+            voted_on_poll_before = true
+          end
+        end
+        if not voted_on_poll_before
+          voted = Voted.new
+          voted.userid = current_user.id
+          voted.pollid = @poll.id
+
+          if voted.save
+            @poll.option_b_score += 1
+          end
+        end
+      end
+    end
     
     respond_to do |format|
       if @poll.update_attributes(params[:poll])
@@ -149,34 +176,34 @@ class PollsController < ApplicationController
     end
   end
   
-  def vote_c
-    @poll = Poll.find(params[:id])
-    @poll.option_c_score += 1
-    
-    respond_to do |format|
-      if @poll.update_attributes(params[:poll])
-        format.html { redirect_to @poll, notice: 'Your vote was successful' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @poll, notice: 'Your vote was unsuccessful' }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  def vote_d
-    @poll = Poll.find(params[:id])
-    @poll.option_d_score += 1
-    
-    respond_to do |format|
-      if @poll.update_attributes(params[:poll])
-        format.html { redirect_to @poll, notice: 'Your vote was successful' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @poll, notice: 'Your vote was unsuccessful' }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def vote_c
+  #   @poll = Poll.find(params[:id])
+  #   @poll.option_c_score += 1
+  #   
+  #   respond_to do |format|
+  #     if @poll.update_attributes(params[:poll])
+  #       format.html { redirect_to @poll, notice: 'Your vote was successful' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { redirect_to @poll, notice: 'Your vote was unsuccessful' }
+  #       format.json { render json: @poll.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  # 
+  # def vote_d
+  #   @poll = Poll.find(params[:id])
+  #   @poll.option_d_score += 1
+  #   
+  #   respond_to do |format|
+  #     if @poll.update_attributes(params[:poll])
+  #       format.html { redirect_to @poll, notice: 'Your vote was successful' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { redirect_to @poll, notice: 'Your vote was unsuccessful' }
+  #       format.json { render json: @poll.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
   
 end
