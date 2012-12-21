@@ -17,3 +17,6 @@ user.add_role :admin
 user2 = User.find_or_create_by_email :name => 'Second User', :email => 'user2@example.com', :password => 'please', :password_confirmation => 'please'
 puts 'user: ' << user2.name
 user2.add_role :VIP
+user3 = User.find_or_create_by_email :name => 'Third User', :email => 'user3@example.com', :password => 'please', :password_confirmation => 'please'
+puts 'user: ' << user3.name
+user2.add_role :user
