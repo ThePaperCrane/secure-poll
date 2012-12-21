@@ -27,6 +27,13 @@ class PollsController < ApplicationController
       @current_winner = :tied
     end
     
+    rsakey = Rsakey.find_by_userid(current_user.id)
+    keypair = Marshal.load(rsakey.marshkey)
+    vote_a_pt = "vote-a"
+    @vote_a_ct = keypair.encrypt(vote_a_pt)
+    vote_b_pt = "vote-b"
+    @vote_b_ct = keypair.encrypt(vote_b_pt)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @poll }
