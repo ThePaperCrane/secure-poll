@@ -1,4 +1,9 @@
-<h3>Home</h3>
-<% @users.each do |user| %>
-    <p>User: <%=link_to user.name, user %> </p>
+<% if user_signed_in? %>
+    <h4>Welcome!</h4>
+    <p>View Active Polls</p>
+    <p>Create a Poll</p>
+    <p>View Your Polls</p>
+<% else %>
+    <p>You are not logged in.</p>
+    <p>Please login or sign up.</p>
 <% end %>
